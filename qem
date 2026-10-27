@@ -1,0 +1,110 @@
+#include <stdio.h>
+
+char queue[100][50];
+int front = 0, rear = -1;
+
+void registerPatient()
+{
+    if (rear == 99)
+    {
+        printf("Queue is full!\n");
+    }
+    else
+    {
+        rear++;
+        printf("Enter patient name: ");
+        scanf(" %49[^\n]", queue[rear]);
+        printf("Patient registered successfully!\n");
+    }
+}
+
+void callPatient()
+{
+    if (front > rear)
+    {
+        printf("No patients waiting!\n");
+    }
+    else
+    {
+        printf("Calling patient: %s\n", queue[front]);
+        front++;
+    }
+}
+
+void displayFirst()
+{
+    if (front > rear)
+    {
+        printf("No patients waiting!\n");
+    }
+    else
+    {
+        printf("First patient: %s\n", queue[front]);
+    }
+}
+
+void displayWaitingList()
+{
+    int i;
+
+    if (front > rear)
+    {
+        printf("No patients waiting!\n");
+    }
+    else
+    {
+        printf("Waiting list:\n");
+
+        for (i = front; i <= rear; i++)
+        {
+            printf("%s\n", queue[i]);
+        }
+    }
+}
+
+int main()
+{
+    int choice;
+
+    do
+    {
+        printf("\n--- Clinic Queue System ---\n");
+        printf("1. Register patient\n");
+        printf("2. Call next patient\n");
+        printf("3. Display first patient\n");
+        printf("4. Display waiting list\n");
+        printf("5. Exit\n");
+
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice)
+        {
+            case 1:
+                registerPatient();
+                break;
+
+            case 2:
+                callPatient();
+                break;
+
+            case 3:
+                displayFirst();
+                break;
+
+            case 4:
+                displayWaitingList();
+                break;
+
+            case 5:
+                printf("Exiting program.\n");
+                break;
+
+            default:
+                printf("Invalid choice!\n");
+        }
+
+    } while (choice != 5);
+
+    return 0;
+}
