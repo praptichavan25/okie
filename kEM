@@ -1,0 +1,75 @@
+#include<stdio.h>
+#include<string.h>
+char stack[100][100];
+int top =-1;
+void addUpdate(){
+    top++;
+    printf("Add a treatment Update :");
+    scanf(" %[^\n]",stack[top]);
+    printf("Update added successfully!\n");
+}
+void undoUpdate(){
+    if(top==-1){
+        printf("No update to undo!\n");
+    }
+    else{
+        printf("Undo Update: %s\n",stack[top]);
+        top--;
+    }
+}
+void displayRecords(){
+    if(top==-1){
+        printf("No record available!");
+    }
+    else{
+        printf("Current Record\n");
+        printf("%s\n",stack[top]);
+    }
+}
+void displayHistory(){
+    int i;
+    if(top==-1){
+        printf("No update History available");
+    }
+    else{
+        for(i=top;i>=0;i--){
+            printf("%s\n",stack[i]);
+        }
+    }
+}
+int main(){
+    int choice;
+    do{
+        printf("\n---Patient Record System---\n");
+        printf("1. Add treatment update\n");
+        printf("2. Undo latest update\n");
+        printf("3. Display current record\n");
+        printf("4. Display update history\n");
+        printf("5. Exit\n");
+
+        printf("Enter your choice: ");
+        scanf("%d",&choice);
+        switch(choice){
+            case 1:
+                addUpdate();
+                break;
+            case 2:
+                undoUpdate();
+                break;
+            case 3:
+                displayRecords();
+                break;
+            case 4:
+                displayHistory();
+                break;
+            case 5:
+                printf("Exiting program.\n");
+                break;
+
+            default:
+                printf("Enter a valid choice!\n");
+        }
+    }
+    while(choice!=5);
+    return 0;
+}
